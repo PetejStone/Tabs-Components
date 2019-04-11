@@ -3,13 +3,13 @@ class TabLink {
   constructor(link) {
     // Assign this.element to the passed in DOM element
      this.link = link;
-
+    
     // Get the custom data attribute on the Link
       this.data = this.link.dataset.tab;
 
 
     // Using the custom data attribute get the associated Item element
-      this.itemElement = ;
+    //  this.itemElement = ;
 
     // Using the Item element, create a new instance of the TabItem class
     // this.tabItem;
@@ -34,9 +34,10 @@ class TabLink {
 }
 
 class TabItem {
-  constructor(element) {
+  constructor(item) {
     // Assign this.element to the passed in element
-    // this.element;
+     this.item = item;
+     console.log(item);
   }
 
   select() {
@@ -59,5 +60,5 @@ class TabItem {
 - In your .forEach() method's callback function, return a new instance of TabLink and pass in each link as a parameter
 
 */
-
+const items = document.querySelectorAll('.tabs-item').forEach(item => new TabItem(item));
 const links = document.querySelectorAll('.tabs-link').forEach(link => new TabLink(link));
