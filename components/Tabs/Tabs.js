@@ -1,21 +1,21 @@
 
 class TabLink {
-  constructor(link) {
+  constructor(tab, link) {
     // Assign this.element to the passed in DOM element
      this.link = link;
-
+  //  console.log(this.link);
     // Get the custom data attribute on the Link
      this.data = this.link.dataset.tab;
     //console.log(this.data);
 
     // Using the custom data attribute get the associated Item element
 
-     this.itemElement = document.querySelector(`.tabs-item[data-tab="${this.data}"]`);
-    // console.log(this.itemElement)
+     this.itemElement = document.querySelector(`.tabs-item[data-tab="${tab, this.data}"]`);
+     //console.log(this.itemElement)
 
     // Using the Item element, create a new instance of the TabItem class
-     this.tabItem = new TabItem(this.itemElement);
-
+     this.tabItem = new TabItem(tab, this.itemElement);
+      //console.log(this.tabItem)
     // Add a click event listener on this instance, calling the select method on click
      this.link.addEventListener('click', this.select.bind(this));
   };
@@ -40,10 +40,11 @@ class TabLink {
 }
 
 class TabItem {
-  constructor(data) {
+  constructor(tab, data) {
     // Assign this.element to the passed in element
      this.element = data;
-    // console.log(this.element);
+     this.tab = tab;
+
   }
 
   select() {
@@ -69,5 +70,14 @@ class TabItem {
 - In your .forEach() method's callback function, return a new instance of TabLink and pass in each link as a parameter
 
 */
-const items = document.querySelectorAll('.tabs-item').forEach(item => {const leedle = new TabItem(item)});
-let links = document.querySelectorAll('.tabs-link').forEach(link => new TabLink(link));
+// const items = document.querySelectorAll('.tabs-item').forEach(item => {const leedle = new TabItem(item)});
+// let links = document.querySelectorAll('.tabs-link').forEach(link => new TabLink(link));
+
+const tabs = document.querySelectorAll('.tabs');
+tabs.forEach(tab => {
+  const links = tab.querySelectorAll('.tabs-link');
+  //console.log('Navigator:', links.length)
+  links.forEach(link => {
+    new TabLink(tab, link);
+  })
+})
